@@ -1,13 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://coiok60srwjf1"]
+[gd_scene load_steps=11 format=3 uid="uid://coiok60srwjf1"]
 
-[ext_resource type="Script" uid="uid://b574whlxkvwn4" path="res://test.gd" id="1_81phd"]
+[ext_resource type="Script" uid="uid://cmu3v7527cmlx" path="res://space.gd" id="1_4fhbr"]
 [ext_resource type="Texture2D" uid="uid://ce15k28k86vy2" path="res://sprites/Parallax100.png" id="2_rxlph"]
 [ext_resource type="Texture2D" uid="uid://b7j4grj0b6n33" path="res://sprites/Parallax80.png" id="3_ulv8f"]
 [ext_resource type="PackedScene" uid="uid://b5m7tefmcwl7h" path="res://spaceship.tscn" id="5_ulv8f"]
 [ext_resource type="PackedScene" uid="uid://ci44slfqe57nq" path="res://visualizer.tscn" id="6_visualizer"]
+[ext_resource type="PackedScene" uid="uid://dxxkraoia87o6" path="res://asteroid.tscn" id="6_w5eul"]
+[ext_resource type="AudioStream" uid="uid://b4a45d3qw4xtl" path="res://sounds/death_sfx.mp3" id="7_b5fhv"]
+[ext_resource type="Texture2D" uid="uid://y1qg7iqx2lku" path="res://banner_green.png" id="8_4fhbr"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b5fhv"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1vxpe"]
 
 [node name="Space" type="Node2D"]
-script = ExtResource("1_81phd")
+script = ExtResource("1_4fhbr")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -29,15 +36,217 @@ motion_mirroring = Vector2(2000, 2000)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Near"]
 modulate = Color(0.657538, 0.403244, 1, 1)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 2000.0
+offset_bottom = 2000.0
 texture = ExtResource("2_rxlph")
 
+[node name="Asteroid" parent="ParallaxBackground/Near" instance=ExtResource("6_w5eul")]
+position = Vector2(148, -8131)
+
+[node name="Asteroid2" parent="ParallaxBackground/Near" instance=ExtResource("6_w5eul")]
+position = Vector2(299, -7413)
+
+[node name="Asteroid3" parent="ParallaxBackground/Near" instance=ExtResource("6_w5eul")]
+position = Vector2(372, -6978)
+
 [node name="Spaceship" parent="." instance=ExtResource("5_ulv8f")]
-position = Vector2(437, 336)
+position = Vector2(411.259, 442.956)
+scale = Vector2(1.24, 1.24)
+max_tilt_deg = 55.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Visualizer" parent="CanvasLayer" instance=ExtResource("6_visualizer")]
-position = Vector2(464, 671)
+position = Vector2(464, 568)
 scale = Vector2(0.207432, 0.226225)
+
+[node name="Asteroid" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(114, 187)
+
+[node name="Asteroid2" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(532, 106)
+
+[node name="Asteroid3" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(291, -1079)
+
+[node name="Asteroid5" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(698, -272)
+
+[node name="Asteroid8" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-138, -311)
+
+[node name="DeathSoundEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_b5fhv")
+
+[node name="BoundaryLeft" type="StaticBody2D" parent="."]
+position = Vector2(-464, -893)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundaryLeft"]
+shape = SubResource("WorldBoundaryShape2D_b5fhv")
+
+[node name="BoundaryRight" type="StaticBody2D" parent="."]
+position = Vector2(1109, -914)
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundaryRight"]
+shape = SubResource("WorldBoundaryShape2D_b5fhv")
+
+[node name="Asteroid12" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(1066, 91)
+
+[node name="Asteroid13" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(1048, -63)
+
+[node name="Asteroid14" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(451, -561)
+
+[node name="Asteroid16" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(154, -1469)
+
+[node name="Asteroid18" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-321, -1276)
+
+[node name="Asteroid19" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-198, -1022)
+
+[node name="Asteroid23" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(888, -1520)
+
+[node name="Asteroid24" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(955, -1154)
+
+[node name="Asteroid25" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(231, -2338)
+
+[node name="Asteroid27" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(555, -2740)
+
+[node name="Asteroid29" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(864, -3127)
+
+[node name="Asteroid30" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-125, -2150)
+
+[node name="Asteroid32" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-173, -2870)
+
+[node name="Asteroid35" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(211, -3793)
+
+[node name="Asteroid36" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(328, -3260)
+
+[node name="Asteroid39" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(776, -2286)
+
+[node name="Asteroid40" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(818, -1906)
+
+[node name="Asteroid42" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(875, -4293)
+
+[node name="Asteroid46" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-483, -3679)
+
+[node name="Asteroid47" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-507, -4069)
+
+[node name="Asteroid49" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-46, -4270)
+
+[node name="Asteroid50" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(169, -4773)
+
+[node name="Asteroid52" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(144, -5291)
+
+[node name="Asteroid53" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-423, -5226)
+
+[node name="Asteroid54" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-671, -4930)
+
+[node name="Asteroid55" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-131, -5690)
+
+[node name="Asteroid58" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(93, -6299)
+
+[node name="Asteroid59" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(827, -5902)
+
+[node name="Asteroid60" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(835, -6075)
+
+[node name="Asteroid61" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(819, -6249)
+
+[node name="Asteroid62" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(685, -6188)
+
+[node name="Asteroid63" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(971, -6191)
+
+[node name="Asteroid64" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-691, -7549)
+
+[node name="Asteroid65" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(1186, -7597)
+
+[node name="Asteroid66" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-785, -8149)
+
+[node name="Asteroid67" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(1091, -8243)
+
+[node name="Asteroid68" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-468, -7137)
+
+[node name="Asteroid69" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(-296, -6683)
+
+[node name="Asteroid70" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(1179, -7240)
+
+[node name="Asteroid71" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(1098, -6780)
+
+[node name="Asteroid72" parent="." instance=ExtResource("6_w5eul")]
+position = Vector2(1039, -6472)
+
+[node name="Finish" type="Area2D" parent="."]
+position = Vector2(193, -8709)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Finish"]
+shape = SubResource("WorldBoundaryShape2D_1vxpe")
+
+[node name="BannerGreen" type="Sprite2D" parent="."]
+position = Vector2(336, -8772)
+texture = ExtResource("8_4fhbr")
+
+[node name="BannerGreen2" type="Sprite2D" parent="."]
+position = Vector2(205, -8784)
+texture = ExtResource("8_4fhbr")
+
+[node name="BannerGreen3" type="Sprite2D" parent="."]
+position = Vector2(66, -8786)
+texture = ExtResource("8_4fhbr")
+
+[node name="BannerGreen4" type="Sprite2D" parent="."]
+position = Vector2(136, -8864)
+texture = ExtResource("8_4fhbr")
+
+[node name="BannerGreen5" type="Sprite2D" parent="."]
+position = Vector2(66, -8786)
+texture = ExtResource("8_4fhbr")
+
+[node name="BannerGreen6" type="Sprite2D" parent="."]
+position = Vector2(285, -8860)
+texture = ExtResource("8_4fhbr")
+
+[node name="BannerGreen7" type="Sprite2D" parent="."]
+position = Vector2(366, -9090)
+scale = Vector2(13.2, 13.2)
+texture = ExtResource("8_4fhbr")

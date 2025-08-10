@@ -6,14 +6,47 @@ extends CharacterBody2D
 @export var friction_per_second: float = 10.0
 @export var braking_power: float = 500.0
 
+# Health setup
+@export var max_hp: int = 6
+var hp: int
+var is_dead: bool = false
+var death_timer: float = 0.0
+@export var death_duration: float = 1.0
+
 var flame_thresholds := [0.2, 0.45, 0.7, 0.9]
 
 var neutral_angle: float
 
 func _ready() -> void:
 	neutral_angle = rotation
+	# Initialize health
+	hp = max_hp
+	
+	# Create death effect overlay
+	if not has_node("Camera2D/DeathOverlay"):
+		var overlay = ColorRect.new()
+		overlay.name = "DeathOverlay"
+		overlay.color = Color(1, 0, 0, 0) # Red with 0 alpha initially
+		overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+		overlay.size = Vector2(1920, 1080) # Make it large enough for screen
+		overlay.visible = false
+		$Camera2D.add_child(overlay)
 
 func _physics_process(delta: float) -> void:
+	# Death animation handling
+	if is_dead:
+		death_timer += delta
+		var overlay = $Camera2D/DeathOverlay
+		overlay.visible = true
+		# Pulse the overlay alpha
+		var pulse = sin(death_timer * 10) * 0.3 + 0.5
+		overlay.color.a = pulse
+		
+		# Reset scene after death_duration
+		if death_timer >= death_duration:
+			get_tree().reload_current_scene()
+		return
+		
 	# Audio band input
 	var left_turn = MicrophoneInput.get_low_band_power()
 	var right_turn = MicrophoneInput.get_high_band_power()
@@ -56,3 +89,49 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, delta * braking_power * brake)
 
 	move_and_slide()
+
+	# Handle collisions with asteroids
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider and collider.has_meta("material") and collider.get_meta("material") == "asteroid":
+			var cs = collider.get_node("CollisionShape2D")
+			if cs.disabled:
+				continue
+			# Reduce health
+			hp -= 1
+			get_tree().current_scene.get_node("CanvasLayer/Visualizer/RichTextLabel").text = str(hp) + "/" + str(max_hp)
+			
+			# Check if player died
+			if hp <= 0 and !is_dead:
+				die()
+				return
+				
+			# Disable asteroid collision and play break animation
+			cs.disabled = true
+			var ap = collider.get_node("AnimationPlayer")
+			ap.play("break")
+			if not ap.is_connected("animation_finished", _on_asteroid_animation_finished):
+				ap.connect("animation_finished", _on_asteroid_animation_finished.bind("break", collider))
+
+# Called when an asteroid finishes its break animation
+func _on_asteroid_animation_finished(anim_name: String, asteroid: Node) -> void:
+	if anim_name == "break":
+		asteroid.queue_free()
+		
+# Called when player health reaches zero
+func die() -> void:
+	is_dead = true
+	death_timer = 0.0
+	velocity = Vector2.ZERO
+	# Make ship stop responding to collisions
+	$CollisionShape2D.set_deferred("disabled", true)
+	
+	# Play death sound if available
+	if get_tree().current_scene.has_node("DeathSoundEffect"):
+		var death_sound = get_tree().current_scene.get_node("DeathSoundEffect")
+		if death_sound is AudioStreamPlayer:
+			death_sound.play()
+	
+	# Flash the overlay red
+	$Camera2D/DeathOverlay.visible = true

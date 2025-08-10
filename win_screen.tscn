@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf7g3mh7fsekp"]
+
+[ext_resource type="Texture2D" uid="uid://cbjasllb5ri80" path="res://sprites/win_screen_spaceshipgame_8-10 (1).png" id="1_l2arl"]
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -8.0
+offset_right = 1162.0
+offset_bottom = 649.0
+texture = ExtResource("1_l2arl")

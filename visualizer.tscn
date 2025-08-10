@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci44slfqe57nq"]
+[gd_scene load_steps=9 format=3 uid="uid://ci44slfqe57nq"]
 
 [ext_resource type="Script" uid="uid://b65pxy2ii32hw" path="res://visualizer.gd" id="1_o4in6"]
+[ext_resource type="Texture2D" uid="uid://cbna7hbh3idqm" path="res://sprites/HUD_shipgame.png" id="2_701ly"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lo23o"]
 bg_color = Color(0.6, 0.6, 0.6, 0.545098)
@@ -24,13 +25,18 @@ bg_color = Color(1, 0.823529, 0.160784, 1)
 scale = Vector2(1.00268, 1.00058)
 script = ExtResource("1_o4in6")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.99465, -27.9838)
+scale = Vector2(5.20727, 5.20727)
+texture = ExtResource("2_701ly")
+
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -299.198
-offset_top = -1.34447
-offset_right = 816.802
-offset_bottom = 335.656
+offset_left = -197.471
+offset_top = -9.9942
+offset_right = 918.529
+offset_bottom = 327.006
 rotation = -1.5708
-scale = Vector2(0.519998, 0.439999)
+scale = Vector2(0.135895, 0.257277)
 theme_override_constants/outline_size = 5
 theme_override_styles/background = SubResource("StyleBoxFlat_lo23o")
 theme_override_styles/fill = SubResource("StyleBoxFlat_o4in6")
@@ -41,12 +47,12 @@ show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar2" type="ProgressBar" parent="."]
-offset_left = -71.1982
-offset_top = -1.34447
-offset_right = 1044.8
-offset_bottom = 335.656
+offset_left = 108.709
+offset_top = -10.9936
+offset_right = 1224.71
+offset_bottom = 326.007
 rotation = -1.5708
-scale = Vector2(0.519998, 0.439999)
+scale = Vector2(0.131378, 0.257008)
 theme_override_constants/outline_size = 5
 theme_override_styles/background = SubResource("StyleBoxFlat_701ly")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ex5g4")
@@ -57,12 +63,12 @@ show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar3" type="ProgressBar" parent="."]
-offset_left = 154.802
-offset_top = -0.344466
-offset_right = 1270.8
-offset_bottom = 336.656
+offset_left = 383.971
+offset_top = -10.9936
+offset_right = 1499.97
+offset_bottom = 326.007
 rotation = -1.5708
-scale = Vector2(0.519998, 0.439999)
+scale = Vector2(0.13, 0.250023)
 theme_override_constants/outline_size = 5
 theme_override_styles/background = SubResource("StyleBoxFlat_rlvcg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_l1nd6")
@@ -71,3 +77,11 @@ step = 0.001
 value = 0.83
 show_percentage = false
 metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -273.268
+offset_top = 20.9878
+offset_right = -101.268
+offset_bottom = 192.988
+theme_override_font_sizes/normal_font_size = 60
+text = "6/6"
