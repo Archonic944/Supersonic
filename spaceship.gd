@@ -48,9 +48,9 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	# Audio band input
-	var left_turn = MicrophoneInput.get_low_band_power()
-	var right_turn = MicrophoneInput.get_high_band_power()
-	var forward_thrust = MicrophoneInput.get_mid_band_power()
+	var left_turn = clamp(MicrophoneInput.get_low_band_power(), 0.0, 1.0)
+	var right_turn = clamp(MicrophoneInput.get_high_band_power(), 0.0, 1.0)
+	var forward_thrust = clamp(MicrophoneInput.get_mid_band_power(), 0.0, 1.0)
 	var brake = forward_thrust
 
 	# --- Visuals ---

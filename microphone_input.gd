@@ -18,15 +18,15 @@ var lerp_factor: float = 0.1
 
 # Frequency ranges (in Hz) with simple min/max
 var low_freq_min: float = 0.0
-var low_freq_max: float = 200.0
+var low_freq_max: float = 270.0
 var mid_freq_min: float = 400.0
 var mid_freq_max: float = 1200.0
 var high_freq_min: float = 1400.0
 var high_freq_max: float = 20000.0
 
 var low_freq_multiplier: float = 0.6
-var mid_freq_multiplier: float = 0.75
-var high_freq_multiplier: float = 1.5
+var mid_freq_multiplier: float = 0.4
+var high_freq_multiplier: float = 1.2
 
 # Loads settings from a text file in the same directory as the binary (not res://)
 func load_settings_from_file():
