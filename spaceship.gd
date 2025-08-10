@@ -20,34 +20,16 @@ func _physics_process(delta: float) -> void:
 	var forward_thrust = MicrophoneInput.get_mid_band_power()
 	var brake = forward_thrust
 
-	# Flame visuals
-	var hidden := true
-	for i in range(flame_thresholds.size() - 1, -1, -1):
-		if left_turn >= flame_thresholds[i]:
-			hidden = false
-			$Ship/FireLeft.frame = i
-			break
-	if hidden:
-		$Ship/FireLeft.hide()
-	else:
-		$Ship/FireLeft.show()
-	hidden = true
-	for i in range(flame_thresholds.size() - 1, -1, -1):
-		if right_turn >= flame_thresholds[i]:
-			hidden = false
-			$Ship/FireRight.frame = i
-			break
-	if hidden:
-		$Ship/FireRight.hide()
-	else:
-		$Ship/FireRight.show()
-	if brake > 0.2:
-		$Ship/BrakeWave.speed_scale = brake * 2.5
-		$Ship/BrakeWave.show()
-		$Ship/BrakeLabel.show()
-	else:
-		$Ship/BrakeWave.hide()
-		$Ship/BrakeLabel.hide()
+	# --- Visuals ---
+	var thrust_frame = int(clamp(forward_thrust, 0.0, 1.0) * (flame_thresholds.size() - 1))
+	$Ship/FireRight.frame = thrust_frame
+
+	var left_angle = lerp(deg_to_rad(32), deg_to_rad(-90), clamp(left_turn, 0.0, 1.0))
+	$Ship/LeftFin.rotation = left_angle
+
+	# Right turn rotates Ship/RightFin from -32˚ to 90˚
+	var right_angle = lerp(deg_to_rad(-32), deg_to_rad(90), clamp(right_turn, 0.0, 1.0))
+	$Ship/RightFin.rotation = right_angle
 
 	# Calculate desired rotation change
 	var tilt_offset = wrapf(rotation - neutral_angle, -PI, PI)
