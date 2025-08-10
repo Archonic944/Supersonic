@@ -11,8 +11,22 @@ config_version=5
 [application]
 
 config/name="LowMidHigh"
+run/main_scene="uid://coiok60srwjf1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[audio]
+
+driver/enable_input=true
+
+[autoload]
+
+MicrophoneInput="*res://microphone_input.gd"
+
+[display]
+
+window/size/mode=2
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
@@ -20,5 +34,7 @@ project/assembly_name="LowMidHigh"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0.0588235, 0.156863, 1)

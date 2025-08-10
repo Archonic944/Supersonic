@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://b5m7tefmcwl7h"]
+
+[ext_resource type="Script" uid="uid://bud37ul0hojla" path="res://spaceship.gd" id="1_7g3nn"]
+[ext_resource type="Texture2D" uid="uid://lqwhwkeju5as" path="res://shuttle.png" id="2_pmkdn"]
+[ext_resource type="Texture2D" uid="uid://b8yvdac86tyi1" path="res://sprites/flame-sheet.png" id="3_pmkdn"]
+[ext_resource type="Texture2D" uid="uid://cj6dmu2piflxm" path="res://sprites/brake_wave.png" id="4_51qc7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51qc7"]
+size = Vector2(24, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsmss"]
+atlas = ExtResource("4_51qc7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rowme"]
+atlas = ExtResource("4_51qc7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aknta"]
+atlas = ExtResource("4_51qc7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cgi1"]
+atlas = ExtResource("4_51qc7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bkiek"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsmss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rowme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aknta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cgi1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Spaceship" type="CharacterBody2D"]
+script = ExtResource("1_7g3nn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_51qc7")
+
+[node name="Ship" type="Sprite2D" parent="."]
+texture = ExtResource("2_pmkdn")
+
+[node name="FireLeft" type="Sprite2D" parent="Ship"]
+z_index = -1
+position = Vector2(-13, 30)
+rotation = -3.14159
+texture = ExtResource("3_pmkdn")
+flip_h = true
+hframes = 4
+
+[node name="FireRight" type="Sprite2D" parent="Ship"]
+z_index = -1
+position = Vector2(13, 30)
+rotation = -3.14159
+texture = ExtResource("3_pmkdn")
+hframes = 4
+
+[node name="BrakeWave" type="AnimatedSprite2D" parent="Ship"]
+position = Vector2(1, -38)
+sprite_frames = SubResource("SpriteFrames_bkiek")
+autoplay = "default"
+frame_progress = 0.410714
+
+[node name="BrakeLabel" type="RichTextLabel" parent="Ship"]
+offset_left = -26.0
+offset_top = -80.0
+offset_right = 37.0
+offset_bottom = -40.0
+text = "brake!!"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_horizontal_offset = 0.14
+drag_vertical_offset = 0.17

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://coiok60srwjf1"]
+
+[ext_resource type="Script" uid="uid://b574whlxkvwn4" path="res://test.gd" id="1_81phd"]
+[ext_resource type="Texture2D" uid="uid://ce15k28k86vy2" path="res://sprites/Parallax100.png" id="2_rxlph"]
+[ext_resource type="Texture2D" uid="uid://b7j4grj0b6n33" path="res://sprites/Parallax80.png" id="3_ulv8f"]
+[ext_resource type="PackedScene" uid="uid://b5m7tefmcwl7h" path="res://spaceship.tscn" id="5_ulv8f"]
+[ext_resource type="PackedScene" uid="uid://ci44slfqe57nq" path="res://visualizer.tscn" id="6_visualizer"]
+
+[node name="Space" type="Node2D"]
+script = ExtResource("1_81phd")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Far" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.99194, 0.883463, 2.31028e-06, 1)
+z_index = 3
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(2000, 2000)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Far"]
+modulate = Color(0, 1, 1, 1)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_ulv8f")
+
+[node name="Near" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = 2
+motion_mirroring = Vector2(2000, 2000)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Near"]
+modulate = Color(0.657538, 0.403244, 1, 1)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_rxlph")
+
+[node name="Spaceship" parent="." instance=ExtResource("5_ulv8f")]
+position = Vector2(437, 336)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Visualizer" parent="CanvasLayer" instance=ExtResource("6_visualizer")]
+position = Vector2(464, 671)
+scale = Vector2(0.207432, 0.226225)
