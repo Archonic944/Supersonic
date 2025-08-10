@@ -1,3 +1,5 @@
+# TODO add "trash bins" in between the real bins that reduce overlap
+
 extends Node
 
 # Audio components
@@ -15,7 +17,7 @@ var lerp_factor: float = 0.1
 
 # Frequency ranges (in Hz)
 var low_freq_max: float = 250.0
-var mid_freq_max: float = 1500.0
+var mid_freq_max: float = 1
 var high_freq_max: float = 20000.0
 
 var low_freq_multiplier: float = 0.8
