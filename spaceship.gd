@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var braking_power: float = 500.0
 
 # Health setup
-@export var max_hp: int = 6
+@export var max_hp: int = 2
 var hp: int
 var is_dead: bool = false
 var death_timer: float = 0.0
