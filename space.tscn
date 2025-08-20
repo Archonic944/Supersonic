@@ -57,7 +57,7 @@ max_tilt_deg = 55.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Visualizer" parent="CanvasLayer" instance=ExtResource("6_visualizer")]
-position = Vector2(464, 568)
+position = Vector2(606, 519)
 scale = Vector2(0.207432, 0.226225)
 
 [node name="Asteroid" parent="." instance=ExtResource("6_w5eul")]

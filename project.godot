@@ -10,10 +10,13 @@ config_version=5
 
 [application]
 
-config/name="LowMidHigh"
+config/name="Supersonic"
+config/description="Use your (or a crowd's) voice to pilot a ship!"
 run/main_scene="uid://coiok60srwjf1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/use_filter=false
+boot_splash/image="uid://dudw0y2td8uys"
+config/icon="uid://lqwhwkeju5as"
 
 [audio]
 

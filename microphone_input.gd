@@ -25,7 +25,7 @@ var high_freq_min: float = 1400.0
 var high_freq_max: float = 20000.0
 
 var low_freq_multiplier: float = 0.6
-var mid_freq_multiplier: float = 0.4
+var mid_freq_multiplier: float = 0.55
 var high_freq_multiplier: float = 1.2
 
 # Loads settings from a text file in the same directory as the binary (not res://)
